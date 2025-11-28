@@ -12,13 +12,24 @@ class CalendarUtil {
         fun generateMonthCalendar(yearMonth: YearMonth): List<List<DayData?>> {
             val daysInMonth = yearMonth.lengthOfMonth()
             val firstDayOfMonth = yearMonth.atDay(1)
-            val firstDayOfWeek = firstDayOfMonth.dayOfWeek.value
+            val firstDayOfWeek = firstDayOfMonth.dayOfWeek
+            
+            // 将DayOfWeek转换为从周日开始的索引（0-6）
+            val startIndex = when (firstDayOfWeek) {
+                DayOfWeek.SUNDAY -> 0
+                DayOfWeek.MONDAY -> 1
+                DayOfWeek.TUESDAY -> 2
+                DayOfWeek.WEDNESDAY -> 3
+                DayOfWeek.THURSDAY -> 4
+                DayOfWeek.FRIDAY -> 5
+                DayOfWeek.SATURDAY -> 6
+            }
             
             val calendar = mutableListOf<List<DayData?>>()
             var week = mutableListOf<DayData?>()
             
             // 添加月初的空白日期
-            for (i in 1 until firstDayOfWeek) {
+            for (i in 0 until startIndex) {
                 week.add(null)
             }
             
