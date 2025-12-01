@@ -75,7 +75,7 @@ class CalendarUtil {
                 0f
             }
             
-            val targetDays = (workdays * targetPercentage / 100).toInt()
+            val targetDays = Math.ceil((workdays * targetPercentage / 100).toDouble()).toInt()
             val daysToTarget = maxOf(0, targetDays - checkedInDays)
             
             return MonthStats(
