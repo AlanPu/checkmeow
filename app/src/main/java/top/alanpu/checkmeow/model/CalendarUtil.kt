@@ -66,7 +66,7 @@ class CalendarUtil {
             val allDays = calendar.flatten().filterNotNull()
             val totalDays = allDays.size
             val workdays = allDays.count { it.isWorkday && !it.isRestDay }
-            val checkedInDays = allDays.count { it.isCheckedIn }
+            val checkedInDays = allDays.count { it.isWorkday && !it.isRestDay && it.isCheckedIn }
             val restDays = allDays.count { it.isRestDay }
             
             val currentPercentage = if (workdays > 0) {
