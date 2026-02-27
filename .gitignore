@@ -101,3 +101,12 @@ jacoco/
 
 # Jetpack Compose
 .compose/
+
+# VS Code
+.vscode/
+
+# Release directory
+app/release/
+
+# Java heap dump files
+*.hprof
