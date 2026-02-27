@@ -26,7 +26,7 @@ android {
     // 配置APK名称
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            def apkName = "打卡喵-v${defaultConfig.versionName}.apk"
+            def apkName = "checkmeow-${defaultConfig.versionName}.apk"
             output.outputFileName = apkName
         }
     }
