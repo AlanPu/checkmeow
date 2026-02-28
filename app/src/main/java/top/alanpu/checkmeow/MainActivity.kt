@@ -502,9 +502,19 @@ fun CalendarView(calendar: List<List<DayData?>>, onDayClick: (DayData) -> Unit, 
                 columns = GridCells.Fixed(7),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                items(calendar.flatten()) { dayData ->
+                items(
+                    items = calendar.flatten().mapIndexed { index, dayData -> 
+                        // 为每个日期添加索引，确保空白日期的key唯一性
+                        Pair(dayData, index)
+                    },
+                    key = { pair -> 
+                        // 为每个日期提供唯一的key，避免LazyVerticalGrid复用组件导致的日期映射错误
+                        val (dayData, index) = pair
+                        dayData?.date?.toString() ?: "empty_$index"
+                    }
+                ) {
                     DayItem(
-                        dayData = dayData,
+                        dayData = it.first,
                         onDayClick = onDayClick,
                         onLongPress = onLongPress
                     )
